@@ -1,1 +1,0 @@
-# quant_finance_handbook
