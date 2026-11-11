@@ -28,7 +28,6 @@ header{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1
 .bar{max-width:860px;margin:0 auto;padding:10px 16px 0}
 .brand{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
 .brand h1{font:700 18px/1.2 var(--display);margin:0}
-.brand h1 small{font:400 12px var(--body);color:var(--muted);margin-left:6px}
 .seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:12px;padding:3px 9px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
@@ -122,6 +121,12 @@ canvas{width:100%;height:230px;display:block;touch-action:pan-y}
 .plain{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:8px 12px;margin:10px 0 2px;font-size:14.5px;line-height:1.75}
 .plain b{display:block;font-size:12px;color:var(--accent);letter-spacing:.04em;margin-bottom:2px}
 body.noplain .plain{display:none}
+.il .en{display:inline;color:inherit;font-size:inherit}
+.sep{display:none}
+body[data-lang="both"] .sep{display:inline}
+.brand h1 .en{font:400 12px var(--body);color:var(--muted);margin-left:6px}
+body[data-lang="en"] .brand h1 .en{font:inherit;color:inherit;margin:0}
+body[data-lang="en"] .plain,body[data-lang="en"] #plainT{display:none}
 .flash{outline:2px solid var(--accent)}
 .count{font-size:12px;color:var(--muted)}
 a{color:var(--accent)}
@@ -131,7 +136,7 @@ a{color:var(--accent)}
 <body data-lang="both">
 <header>
  <div class="bar">
-  <div class="brand"><h1>量化金融速查手册<small>Quant Finance Handbook</small></h1>
+  <div class="brand"><h1 class="il"><span class="zh">量化金融速查手册</span><span class="en">Quant Finance Handbook</span></h1>
    <div style="display:flex;gap:8px;align-items:center"><button class="chip" id="plainT" aria-pressed="true" style="font-size:12px;padding:3px 9px">说人话</button><div class="seg" id="lang" role="group" aria-label="Language"><button data-l="both" aria-pressed="true">中英</button><button data-l="zh" aria-pressed="false">中文</button><button data-l="en" aria-pressed="false">EN</button></div></div></div>
   <div class="row" id="roles" role="group" aria-label="Filter by role">
    <button class="chip" data-role="" aria-pressed="true">全部岗位 All roles</button>
@@ -150,7 +155,7 @@ a{color:var(--accent)}
  <p class="lede"><span class="zh">每张卡片包含 payoff 图、完整公式、业内定价模型、交易台做法和风险点。点开看细节。</span><span class="en">Each card has a payoff diagram, the full formulas, the industry pricing model, desk practice and the main risks. Tap to open.</span></p>
  <div class="tools">
   <input type="search" id="q-products" placeholder="搜索 Search: barrier, CMS, 雪球" aria-label="Search products">
-  <button class="btn o" id="exp-products">全部展开 Expand all</button>
+  <button class="btn o" id="exp-products"><span class="il"><span class="zh">全部展开</span> <span class="en">Expand all</span></span></button>
  </div>
  <div class="row" id="assets" role="group" aria-label="Filter by asset class" style="padding-top:0"></div>
  <div class="count" id="n-products"></div>
@@ -161,7 +166,7 @@ a{color:var(--accent)}
  <h2><span class="zh">模型对比：GBM、Local Vol、Heston、SABR、LSV</span><span class="en">Model comparison: GBM, local vol, Heston, SABR, LSV</span></h2>
  <p class="lede"><span class="zh">选模型的标准：它对这个产品敏感的那部分风险（forward smile、vol-of-vol、相关性）描述得对不对。Vanilla 的拟合只是入场券。</span><span class="en">The test of a model is whether it describes the risk the product is sensitive to (forward smile, vol-of-vol, correlation). Fitting vanillas is only the entry ticket.</span></p>
  <div class="tw" id="t-models"></div>
- <h4>SABR smile lab · SABR 实验台</h4>
+ <h4><span class="en il" style="display:inline">SABR smile lab</span><span class="sep"> · </span><span class="zh">SABR 实验台</span></h4>
  <div class="lab">
   <div class="sub"><span class="zh">拖动参数看 Hagan 公式的 implied vol。ρ 管 skew，ν 管曲率，β 管 backbone。把 T 拉长、ν 调大，看低 strike 何时出现负密度。F = 100。</span><span class="en">Drag the parameters to see the Hagan implied vol. ρ sets skew, ν curvature, β the backbone. Lengthen T and raise ν to see negative density appear at low strikes. F = 100.</span></div>
   <div class="ctl">
@@ -176,11 +181,11 @@ a{color:var(--accent)}
   <div class="read" id="r-sabr"></div>
   <div class="note" id="w-sabr"></div>
  </div>
- <h4>Model by model · 逐个模型</h4>
+ <h4><span class="en il" style="display:inline">Model by model</span><span class="sep"> · </span><span class="zh">逐个模型</span></h4>
  <div class="grid" id="list-models"></div>
- <h4>Smile dynamics · Smile 动态</h4>
+ <h4><span class="en il" style="display:inline">Smile dynamics</span><span class="sep"> · </span><span class="zh">Smile 动态</span></h4>
  <div class="grid" id="list-smile"></div>
- <h4>What the industry uses · 业内普遍用什么</h4>
+ <h4><span class="en il" style="display:inline">What the industry uses</span><span class="sep"> · </span><span class="zh">业内普遍用什么</span></h4>
  <div class="tw" id="t-use"></div>
 </section>
 
@@ -210,7 +215,7 @@ a{color:var(--accent)}
   <div class="sub"><span class="zh">误差按 1/√N 收敛。切换方差缩减看标准误怎么变（总路径数不变）。</span><span class="en">Error converges like 1/√N. Switch variance reduction on to see the standard error change (same total paths).</span></div>
   <div class="ctl">
    <label><span><span class="zh">路径数</span> <span class="en">Paths</span></span><select id="mN"><option>2000</option><option selected>20000</option><option>200000</option></select></label>
-   <label><span><span class="zh">方差缩减</span> <span class="en">Variance reduction</span></span><select id="mA"><option value="0">None 无</option><option value="1">Antithetic</option><option value="2">Control variate (S_T)</option></select></label>
+   <label><span><span class="zh">方差缩减</span> <span class="en">Variance reduction</span></span><select id="mA"><option value="0">None</option><option value="1">Antithetic</option><option value="2">Control variate (S_T)</option></select></label>
    <label>&nbsp;<button class="btn" id="mRun"><span class="zh">重新模拟</span> <span class="en">Re-run</span></button></label>
   </div>
   <div class="out" id="o-mc"></div>
@@ -233,11 +238,11 @@ a{color:var(--accent)}
   <div class="read" id="r-fd"></div>
   <div class="note" id="w-fd"></div>
  </div>
- <h4>Monte Carlo cheat sheet · 速查</h4>
+ <h4><span class="en il" style="display:inline">Monte Carlo cheat sheet</span><span class="sep"> · </span><span class="zh">速查</span></h4>
  <div class="grid" id="list-mc"></div>
- <h4>Finite difference cheat sheet · 速查</h4>
+ <h4><span class="en il" style="display:inline">Finite difference cheat sheet</span><span class="sep"> · </span><span class="zh">速查</span></h4>
  <div class="grid" id="list-fd"></div>
- <h4>Choosing a method · 方法选择</h4>
+ <h4><span class="en il" style="display:inline">Choosing a method</span><span class="sep"> · </span><span class="zh">方法选择</span></h4>
  <div class="tw" id="t-meth"></div>
 </section>
 
@@ -246,14 +251,14 @@ a{color:var(--accent)}
  <p class="lede"><span class="zh">每个模型四部分：数学、统计性质、历史、在金融中的应用。从 OLS、Ridge、Lasso 开始。</span><span class="en">Each model has four parts: the maths, the statistical properties, the history and its use in finance. Start with OLS, ridge and lasso.</span></p>
  <div class="tools">
   <input type="search" id="q-ml" placeholder="搜索 Search: lasso, boosting, Kalman" aria-label="Search models">
-  <button class="btn o" id="exp-ml">全部展开 Expand all</button>
+  <button class="btn o" id="exp-ml"><span class="il"><span class="zh">全部展开</span> <span class="en">Expand all</span></span></button>
  </div>
  <div class="row" id="mlg" role="group" aria-label="Filter by family" style="padding-top:0"></div>
  <div class="count" id="n-ml"></div>
  <div class="grid" id="list-ml"></div>
- <h4>General principles · 通用原则</h4>
+ <h4><span class="en il" style="display:inline">General principles</span><span class="sep"> · </span><span class="zh">通用原则</span></h4>
  <div class="grid" id="list-mlgen"></div>
- <h4>Comparison · 对比</h4>
+ <h4><span class="en il" style="display:inline">Comparison</span><span class="sep"> · </span><span class="zh">对比</span></h4>
  <div class="tw" id="t-ml"></div>
 </section>
 
@@ -934,22 +939,22 @@ const ROLES=[
  li:[["核心：无套利定价，测度变换，模型校准，PDE 与 MC，C++。","Core: no-arbitrage pricing, measure changes, calibration, PDE and Monte Carlo, C++."],
  ["面试高频：推导 BS；LV 与 SV 的区别；barrier 和 autocallable 怎么定价与对冲；CN 为什么振荡；Bermudan 怎么校准。","Interview staples: derive Black–Scholes; local vol versus stochastic vol; pricing and hedging barriers and autocallables; why Crank–Nicolson oscillates; calibrating a Bermudan."],
  ["先看：<a href=\"#products\">产品</a>、<a href=\"#models\">模型</a>、<a href=\"#numerics\">数值</a>。","Start with <a href=\"#products\">Products</a>, <a href=\"#models\">Models</a>, <a href=\"#numerics\">Numerics</a>."],
- ["书 Books：Shreve II; Gatheral, The Volatility Surface; Bergomi, Stochastic Volatility Modeling; Andersen &amp; Piterbarg; Glasserman.",""]]},
+ ["书：Shreve II; Gatheral, The Volatility Surface; Bergomi, Stochastic Volatility Modeling; Andersen &amp; Piterbarg; Glasserman.","Books: Shreve II; Gatheral, The Volatility Surface; Bergomi, Stochastic Volatility Modeling; Andersen &amp; Piterbarg; Glasserman."]]},
 {side:"SELL SIDE",k:"r",t:["Risk Quant（market risk / CCR / 模型验证）","Risk quant (market risk / CCR / model validation)"],s:["度量尾部损失、资本与保证金，挑战前台模型。","Measures tail loss, capital and margin, and challenges front-office models."],
  li:[["核心：VaR/ES 方法论，FRTB，IM，暴露模拟，回测，统计。","Core: VaR/ES methodology, FRTB, initial margin, exposure simulation, backtesting, statistics."],
  ["面试高频：VaR 与 ES 的优缺点；HS 的 shift 类型；NMRF 与 proxy；PLA 失败的原因；怎么验证一个 LV 模型。","Interview staples: VaR versus ES; shift types in HS; NMRFs and proxies; why PLA fails; how to validate a local-vol model."],
  ["先看：<a href=\"#risk\">风险</a>、<a href=\"#math\">概率统计</a>、<a href=\"#market\">实操</a>。","Start with <a href=\"#risk\">Risk</a>, <a href=\"#math\">Maths</a>, <a href=\"#market\">Practice</a>."],
- ["书 Books：McNeil, Frey &amp; Embrechts, Quantitative Risk Management; Gregory, The xVA Challenge; Basel MAR.",""]]},
+ ["书：McNeil, Frey &amp; Embrechts, Quantitative Risk Management; Gregory, The xVA Challenge; Basel MAR.","Books: McNeil, Frey &amp; Embrechts, Quantitative Risk Management; Gregory, The xVA Challenge; Basel MAR."]]},
 {side:"BUY SIDE / PROP",k:"t",t:["Quant Trader","Quant trader"],s:["在不确定下快速做决策，管理头寸风险。","Makes fast decisions under uncertainty and manages position risk."],
  li:[["核心：概率心算，期望值与赔率，做市博弈，期权 Greeks 直觉，仓位管理。","Core: mental probability, expected value and odds, market-making games, option Greeks intuition, position sizing."],
  ["面试高频：brain teaser，make-me-a-market，连续下注与 Kelly，gamma scalping 的 P&L。","Interview staples: brain teasers, make-me-a-market, sequential betting and Kelly, gamma-scalping P&L."],
  ["先看：<a href=\"#drills\">题库</a>、<a href=\"#market\">实操</a>、<a href=\"#math\">概率统计</a>。","Start with <a href=\"#drills\">Drills</a>, <a href=\"#market\">Practice</a>, <a href=\"#math\">Maths</a>."],
- ["书 Books：Zhou, A Practical Guide to Quantitative Finance Interviews; Crack, Heard on the Street; Natenberg; Sinclair, Volatility Trading.",""]]},
+ ["书：Zhou, A Practical Guide to Quantitative Finance Interviews; Crack, Heard on the Street; Natenberg; Sinclair, Volatility Trading.","Books: Zhou, A Practical Guide to Quantitative Finance Interviews; Crack, Heard on the Street; Natenberg; Sinclair, Volatility Trading."]]},
 {side:"BUY SIDE / PROP",k:"q",t:["Quant Researcher","Quant researcher"],s:["从数据里找可重复的信号，并证明它不是过拟合。","Finds repeatable signals in data and shows they are not overfit."],
  li:[["核心：统计与机器学习，时间序列，因子模型，组合构建，交易成本。","Core: statistics and machine learning, time series, factor models, portfolio construction, transaction costs."],
  ["面试高频：线性回归的全部细节，MLE，偏差-方差，多重检验，回测陷阱，协方差估计。","Interview staples: every detail of linear regression, MLE, bias-variance, multiple testing, backtest traps, covariance estimation."],
  ["先看：<a href=\"#math\">概率统计</a>、<a href=\"#drills\">题库</a>、<a href=\"#market\">实操</a>。","Start with <a href=\"#math\">Maths</a>, <a href=\"#drills\">Drills</a>, <a href=\"#market\">Practice</a>."],
- ["书 Books：Grinold &amp; Kahn; López de Prado, Advances in Financial Machine Learning; Hastie et al., ESL; Isichenko.",""]]}
+ ["书：Grinold &amp; Kahn; López de Prado, Advances in Financial Machine Learning; Hastie et al., ESL; Isichenko.","Books: Grinold &amp; Kahn; López de Prado, Advances in Financial Machine Learning; Hastie et al., ESL; Isichenko."]]}
 ];
 
 /* ================= PAPERS ================= */
@@ -1287,11 +1292,11 @@ const PLAIN={
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 /* ---------- bilingual + rendering helpers ---------- */
 const nz=s=>s.replace(/[（(]/g,"(").replace(/[）)]/g,")").replace(/，/g,",").replace(/\s/g,"");
-const B=p=>!Array.isArray(p)?p:(p[1]&&nz(p[0])!=nz(p[1])?'<span class="zh">'+p[0]+'</span> <span class="en">'+p[1]+'</span>':p[0]);
+const B=p=>!Array.isArray(p)?p:p[1]&&nz(p[0])==nz(p[1])?p[1]:(p[1]?'<span class="zh">'+p[0]+'</span> <span class="en">'+p[1]+'</span>':p[0]);
 const tex=f=>'<div class="f">\\['+f+'\\]</div>';
 const fblock=fs=>fs.map(x=>Array.isArray(x)?(x[0][0]?'<div class="fl">'+B(x[0])+'</div>':'')+tex(x[1]):tex(x)).join("");
 const tags=(r,g)=>'<div class="tags">'+(g?'<span class="tag g">'+g+'</span>':'')+[...r].map(x=>'<span class="tag">'+RN[x]+'</span>').join("")+'</div>';
-const sec=(zh,en)=>'<div class="sec">'+en.toUpperCase()+' · '+zh+'</div>';
+const sec=(zh,en)=>'<div class="sec"><span class="en" style="display:inline;color:inherit;font-size:inherit">'+en.toUpperCase()+'</span><span class="sep"> · </span><span class="zh">'+zh+'</span></div>';
 function table(t){return '<table><tr>'+t.h.map(c=>'<th>'+B(c)+'</th>').join("")+'</tr>'+t.rows.map(r=>'<tr>'+r.map(c=>'<td>'+B(c)+'</td>').join("")+'</tr>').join("")+'</table>'}
 function card(c){return '<article class="card" data-r="'+c.r+'"><h3>'+B(c.t)+'</h3>'+(c.f?fblock(c.f):"")+(c.tb?'<div class="tw" style="border:0;margin-top:8px">'+table(c.tb).replace("<table>",'<table style="min-width:360px">')+'</div>':"")+
   '<ul>'+c.li.map(l=>'<li>'+B(l)+'</li>').join("")+'</ul>'+(c.ref?'<p class="ref">'+c.ref+'</p>':"")+tags(c.r)+'</article>'}
@@ -1307,10 +1312,10 @@ function paySVG(d){const W=340,H=170,l=38,r=10,t=10,b=32,n=240,xs=[];for(let i=0
   return o+'</svg><div class="legend">'+d.s.map((s,k)=>'<span><i'+(k?' class="d"':'')+'></i>'+B(s.l)+'</span>').join("")+'</div>'}
 const dl=rows=>rows.map(x=>sec(x[0],x[1])+'<div>'+B(x[2])+'</div>').join("");
 
-$("#list-products").innerHTML=P.map((x,i)=>'<details class="card" data-r="'+x.r+'" data-g="'+x.g+'"'+(i==0?" open":"")+'><summary><div class="sumtop"><h3>'+x.n[0]+'<span class="en" style="display:block">'+x.n[1]+'</span></h3></div><div class="sub">'+B(x.i)+'</div>'+tags(x.r,AS[x.g])+'</summary>'+
+$("#list-products").innerHTML=P.map((x,i)=>'<details class="card" data-r="'+x.r+'" data-g="'+x.g+'"'+(i==0?" open":"")+'><summary><div class="sumtop"><h3>'+B([x.n[1],x.n[0]])+'</h3></div><div class="sub">'+B(x.i)+'</div>'+tags(x.r,AS[x.g])+'</summary>'+
   (x.d?sec("收益图","Payoff")+paySVG(x.d):"")+sec("公式","Formulas")+fblock(x.f)+dl([["定价模型","Pricing model",x.p],["交易台实操","Desk practice",x.m],["风险点","Risks",x.k]])+sec("文献","References")+'<div class="ref">'+x.ref+'</div></details>').join("");
 $("#list-models").innerHTML=M.map(x=>'<details class="card" data-r="'+x.r+'"><summary><div class="sumtop"><h3>'+x.n+'</h3></div><div class="sub">'+B(x.use)+'</div></summary>'+fblock(x.f)+dl([["优点","Strengths",x.pro],["缺点","Weaknesses",x.con]])+sec("文献","References")+'<div class="ref">'+x.ref+'</div></details>').join("");
-$("#list-ml").innerHTML=ML.map((x,i)=>'<details class="card" data-r="'+x.r+'" data-m="'+x.g+'"'+(i==0?" open":"")+'><summary><div class="sumtop"><h3>'+x.n[0]+'<span class="en" style="display:block">'+x.n[1]+'</span></h3></div><div class="sub">'+B(x.i)+'</div>'+tags(x.r,ML_GROUPS[x.g])+'</summary>'+
+$("#list-ml").innerHTML=ML.map((x,i)=>'<details class="card" data-r="'+x.r+'" data-m="'+x.g+'"'+(i==0?" open":"")+'><summary><div class="sumtop"><h3>'+B(x.n)+'</h3></div><div class="sub">'+B(x.i)+'</div>'+tags(x.r,ML_GROUPS[x.g])+'</summary>'+
   sec("数学","Maths")+fblock(x.f)+dl([["统计性质","Statistics",x.st],["历史","History",x.h],["金融应用","Applications in finance",x.a]])+sec("文献","References")+'<div class="ref">'+x.ref+'</div></details>').join("");
 $("#list-drills").innerHTML=Q.map((x,i)=>'<details class="card" data-r="'+x.r+'" data-c="'+x.c+'"><summary><div class="sumtop"><h3>'+(i+1)+'. '+B(x.q)+'</h3></div>'+tags(x.r,CT[x.c])+'</summary><div class="ans"><b>'+B(x.a)+'</b><p>'+B(x.e)+'</p></div></details>').join("");
 [["smile",C_SMILE],["market",C_MARKET],["mc",C_MC],["fd",C_FD],["mlgen",C_MLGEN],["math",C_MATH],["risk",C_RISK]].forEach(a=>$("#list-"+a[0]).innerHTML=a[1].map(card).join(""));
@@ -1346,7 +1351,9 @@ window.addEventListener("hashchange",show);
 /* ---------- language + filters ---------- */
 let role="",asset="",cat="",mlg="",lang="both";
 try{role=localStorage.getItem("qc-role")||"";lang=localStorage.getItem("qc-lang")||"both"}catch(e){}
-function setLang(l){lang=l;document.body.dataset.lang=l;try{localStorage.setItem("qc-lang",l)}catch(e){}
+const PH={"q-products":["搜索：barrier、CMS、雪球","Search: barrier, CMS, snowball"],"q-ml":["搜索：lasso、boosting、Kalman","Search: lasso, boosting, Kalman"],"q-drills":["搜索题目","Search questions"]};
+function setLang(l){lang=l;document.body.dataset.lang=l;document.documentElement.lang=l=="en"?"en":"zh-CN";document.title=l=="en"?"Quant Finance Handbook":"量化金融速查手册";
+  for(const k in PH)$("#"+k).placeholder=l=="zh"?PH[k][0]:l=="en"?PH[k][1]:PH[k][0]+" "+PH[k][1].replace("Search: ","");try{localStorage.setItem("qc-lang",l)}catch(e){}
   $$("#lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l==l))}
 $("#lang").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setLang(b.dataset.l)});
 function chips(el,items,cb){el.innerHTML=items.map((x,i)=>'<button class="chip" data-v="'+x[0]+'" aria-pressed="'+(i==0)+'">'+x[1]+'</button>').join("");
@@ -1369,11 +1376,15 @@ function apply(){
   cnt("products",P.length);cnt("drills",Q.length);cnt("ml",ML.length);
 }
 ["q-products","q-drills","q-ml"].forEach(i=>$("#"+i).oninput=apply);
-function expander(btn,list){$(btn).onclick=function(){const open=!this._o;this._o=open;$$(list+" details").forEach(d=>d.open=open);this.textContent=open?"全部收起 Collapse all":"全部展开 Expand all"}}
+function expander(btn,list){$(btn).onclick=function(){const open=!this._o;this._o=open;$$(list+" details").forEach(d=>d.open=open);this.innerHTML='<span class="il">'+(open?'<span class="zh">全部收起</span> <span class="en">Collapse all</span>':'<span class="zh">全部展开</span> <span class="en">Expand all</span>')+'</span>'}}
 expander("#exp-products","#list-products");expander("#exp-ml","#list-ml");
 $("#rand").onclick=()=>{const v=$$("#list-drills .card:not(.hide)");if(!v.length)return;const d=v[Math.floor(Math.random()*v.length)];
   $$("#list-drills details").forEach(x=>{x.open=false;x.classList.remove("flash")});d.classList.add("flash");d.scrollIntoView({block:"center",behavior:"smooth"})};
 
+/* ---------- split mixed zh/en labels so each language mode shows one ---------- */
+const CJK=/[\u3000-\u303f\u4e00-\u9fff\uff00-\uffef]+/g;
+$$(".tab,.chip:not(#plainT),.tag.g").forEach(el=>{const s=el.textContent,zh=(s.match(CJK)||[]).join(""),en=s.replace(CJK,"").replace(/\s+/g," ").trim();
+  if(zh&&en){el.classList.add("il");el.innerHTML='<span class="zh">'+zh+'</span> <span class="en">'+en+'</span>'}});
 /* ---------- chart ---------- */
 const tok=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function chart(cv,S,o){cv._a=[S,o];if(!cv._h){cv._h=1;
